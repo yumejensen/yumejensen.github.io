@@ -3,18 +3,27 @@ $(() => {
   const $tweetsDiv = $('<div class="tweets"></div>'); // div that holds all the tweets
   $page.append($tweetsDiv); // add div that holds tweets to the body of twiddler.html
 
+  //HEADER OF WEB-PAGE - prepend to $page
+  const $topOfPage = $('<h1 id="header">YUME TWIDDLER PAGE!</h1>');
+    $page.prepend($topOfPage);
+
+  // BUTTON TO REFRESH TWEETS
+  const $refreshButton = $('<button id="new-tweets-button">REFRESH TWEETS</button>');
+    // insert button after header
+    $refreshButton.insertAfter($topOfPage);
 
 // streams.home array holds objects that look like:
 // {user: 'shawndrost', message: 'just enjoyed an entire city #sf', created_at: Wed Jun 04 2025 11:03:43 GMT-0500 (Central Daylight Time)}
   
+// FUNCTION TO ADD TWEETS ---------------------------------------------------------------------------------- 
 // array param to make function re-usable
 function addNewTweets(array){ // putting map into a function
   // map over streams.home array to modify individual tweets
-  const $tweets = array.map((tweet) => {
+  const $tweets = array.toReversed().map((tweet) => {
     // create div to hold tweets inside
     const $tweet = $('<div class="tweet"></div>');
 
-    // username needs to be in its own tag - class "username" to be clickable
+    // username class username div
     const $username = $(`<div class="username">${tweet.user}</div>`);
       // needs a click function to show tweet history
 
@@ -22,33 +31,40 @@ function addNewTweets(array){ // putting map into a function
     const $message = $(`<div class="message">${tweet.message}</div>`);
 
     //create div with time in human friendly way
-      // make human friendly time with format "x seconds ago" "x minutes ago"
+    // make human friendly time with format "x seconds ago" "x minutes ago"
     const timeAgo = moment(tweet.created_at).fromNow();
-    //humanFriendlyTimestamp
-    const $timesince = $(`<div class="humanFriendlyTimestamp">(${timeAgo})</div>`);
+      //humanFriendlyTimestamp div
+      const $timesince = $(`<div class="humanFriendlyTimestamp">(${timeAgo})</div>`);
 
     //create div to hold timestamp inside with class timestamp
       // make current date with format June 4th 2025, 3:43:10 pm
     const timeNow = moment().format("MMMM Do YYYY, h:mm:ss a")
-    const $timestamp = $(`<div class="timestamp">${timeNow}</div>`);
+      const $timestamp = $(`<div class="timestamp">${timeNow}</div>`);
 
 
-    // append all necessary things to $tweet
+    // append all necessary parts to $tweet
     $tweet.append($username);
     $tweet.append($message);
     $tweet.append($timesince);
     $tweet.append($timestamp);
-    
-
+    // return tweet
     return $tweet;
   });
-  $tweetsDiv.append($tweets); // adding individual tweets to tweetsDiv
-};
-addNewTweets(streams.home); // calling function for adding tweets ^^^
+  // append every individual tweet to the larger tweets div
+  $tweetsDiv.append($tweets); 
+}; // ------------------------------------------------------------------------------------------------------
+addNewTweets(streams.home); // calling function for first time load
 
-console.log(moment())
-// create a button and add it to the $page (doNot add it to $tweetsDiv)
-  // click handler will use addNewTweets to refresh new tweets
+
+// CLICK HANDLER ON NEW TWEETS BUTTON
+$refreshButton.on('click', () => {
+  // remove tweets already ON page currently
+  $tweetsDiv.html("");
+  // call addNewTweets function to refresh
+  addNewTweets(streams.home);
+})
+
+
 
   // when showing new tweets, can remove the tweets that are already on the page and then add the tweets back
   // look up jQuery methods that will clear an element/tag - the tag that you would clear is the $tweetsDiv
