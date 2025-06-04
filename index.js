@@ -26,6 +26,13 @@ function addNewTweets(array){ // putting map into a function
     // username class username div
     const $username = $(`<div class="username">${tweet.user}</div>`);
       // needs a click function to show tweet history
+    // make username into a button? 
+    const $usernameButton = $(`<button class="users-button">${$username}</button>`);
+    // when you click username, show user history
+    $usernameButton.on('click', () => {
+      $tweetsDiv.empty();
+      addNewTweets(streams.users);
+    })
 
     //create a tag with message inside
     const $message = $(`<div class="message">${tweet.message}</div>`);
@@ -41,8 +48,7 @@ function addNewTweets(array){ // putting map into a function
     const timeNow = moment().format("MMMM Do YYYY, h:mm:ss a")
       const $timestamp = $(`<div class="timestamp">${timeNow}</div>`);
 
-
-    // append all necessary parts to $tweet
+    // append all necessary parts to each $tweet
     $tweet.append($username);
     $tweet.append($message);
     $tweet.append($timesince);
@@ -56,14 +62,15 @@ function addNewTweets(array){ // putting map into a function
 addNewTweets(streams.home); // calling function for first time load
 
 
-// CLICK HANDLER ON NEW TWEETS BUTTON
+// CLICK HANDLER ON NEW TWEETS BUTTON ----------------------------------------------------------------------
 $refreshButton.on('click', () => {
   // remove tweets already ON page currently
-  $tweetsDiv.html("");
+  //$tweetsDiv.html("");
+  $tweetsDiv.empty();
   // call addNewTweets function to refresh
   addNewTweets(streams.home);
 })
-
+//----------------------------------------------------------------------------------------------------------
 
 
   // when showing new tweets, can remove the tweets that are already on the page and then add the tweets back
