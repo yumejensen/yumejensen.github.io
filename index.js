@@ -7,36 +7,47 @@ $(() => {
   $page.append($tweetsDiv); // add div that holds tweets to the body of twiddler.html
 
   // HEADER OF WEB-PAGE
-  const $topOfPage = $('<h1 id="header">YUME TWIDDLER PAGE!</h1>');
+  const $topOfPage = $('<h1 id="header">TWIDDLER!</h1>');
     //prepend to main page
     $page.prepend($topOfPage);
 
   // BUTTON TO REFRESH TWEETS
-  const $refreshButton = $('<button id="new-tweets-button">REFRESH TWEETS</button>');
+  const $refreshButton = $('<button id="new-tweets-button">refresh twids</button>');
     // insert button after header
     $refreshButton.insertAfter($topOfPage);
   
   // FORM TO ADD TWEETS -------------------------------------------------------------------------------------------------------
   const $inputTweet = $('<form id="input-tweet"></form>');
-  // $inputTweet.insertAfter($refreshButton);
-  // // append nameInput and messageInput into form
-  // $inputTweet.append($nameInput);
-  // $inputTweet.append($messageInput);
-  //   // username input div
-  //   const $nameInput = $('<div class="input"></div>');
-  //   // append label to $nameInput
-  //     $nameInput.append($('<input type="text"></input>'))
-
-  //   // message input div
-  //   const $messageInput = $('<div class="input"></div>');
-  
-  // ---------------------------------------------------------------------------------------------------------------------------
-
-    //pend an input into the form
-    const $userInput = $('<input type="text"></input>');
-    $inputTweet.append($userInput);
-    // insert this after refresh button
+    // insert form after the refresh button
     $inputTweet.insertAfter($refreshButton);
+  // Form header
+  $inputTweet.append($('<h1 id="input-form-title">Write a twid!</h1>'))
+
+  // ENTER USERNAME
+  const $userInputDiv = $('<div id="input-username"></div>');
+    // append div to form
+    $inputTweet.append($userInputDiv);
+    // append user input stuff inside user input div
+    $userInputDiv
+      .append($('<label for="userInput"> name:</label>'))
+      .append($('<input type="text" id="username-box"></input>'));
+
+  // ENTER MESSAGE
+  const $messageInputDiv = $('<div id="input-message"></div>'); 
+    // append div into form
+    $inputTweet.append($messageInputDiv);
+    // append user message stuff inside message input div
+    $messageInputDiv
+      .append($('<label for="userMsg"> message:</label>'))
+      .append($('<input type="text" id="message-box"></input>'));
+
+   // ---------------------------------------------------------------------------------------------------------------------------
+  
+  // SUBMIT BUTTON ON FORM
+  const $messageSubmit = $('<button id="submit-button">post twid</button>');
+    // add button after form
+    $messageSubmit.insertAfter($inputTweet);
+
  
   // FUNCTION TO ADD TWEETS ----------------------------------------------------------------------------------------------------- 
   // array param to make function re-usable
@@ -49,14 +60,14 @@ $(() => {
       //USERNAME + CLICK ON USERNAME TO SEE TIMELINE ----------------------------------
       // username (class username) button
       const username = tweet.user;
-      const $username = $(`<button class="username">@${username}</button>`);
+      const $username = $(`<button class="username-button">@${username}</button>`);
       // when usename is clicked
       $username.on('click', () => {
         // remove tweets already ON page currently
         $tweetsDiv.empty();
         // calls addTweets with that specific user input
         addNewTweets(streams.users[username]);
-      }) //----------------------------------------------------------------------------
+      }) //---------------------------------------------------------------------------------------------------------------------
 
       // message div (class message)
       const $message = $(`<div class="message">${tweet.message}</div>`);
@@ -82,19 +93,39 @@ $(() => {
     });
     // append every individual tweet to the larger tweets div
     $tweetsDiv.append($tweets); 
-  }; // -----------------------------------------------------------------------------------------------------------------------
+  }; // ------------------------------------------------------------------------------------------------------------------------
   addNewTweets(streams.home); // CALL ADD TWEETS 
 
 
-  // CLICK HANDLER ON REFRESH TWEETS BUTTON -----------------------------------------------------------------------------------
+  // CLICK HANDLER ON REFRESH TWEETS BUTTON ------------------------------------------------------------------------------------
   $refreshButton.on('click', () => {
     // remove tweets already ON page currently
     $tweetsDiv.empty();
     // call addNewTweets function to refresh
     addNewTweets(streams.home);
   })
-  //----------------------------------------------------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------------------------------------------------
 
 
 
+
+  // STYLING! -------------------------------------------------------------------------------------------------------------------
+  // general page
+  $('#all-contents').css({
+    "background-color": "rgb(255, 241, 118)",
+    "padding-left": "30px",
+    "padding-right": "30px",
+    "padding-top": "30px",
+    "padding-bottom": "50px"
+    })
+  // header
+  $('#header').css({
+     "font-size": "28px" 
+  })
+  //tweets div
+  $('.tweets').css({
+    "background-color": "rgb(255, 204, 110)"
+  })
+  // username buttons
+  
 }); // don't delete this 
