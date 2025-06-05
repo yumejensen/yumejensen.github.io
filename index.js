@@ -23,14 +23,14 @@ $(() => {
   // Form header
   $inputTweet.append($('<h1 id="input-form-title">Write a twid!</h1>'))
 
-  // ENTER USERNAME
-  const $userInputDiv = $('<div id="input-username"></div>');
-    // append div to form
-    $inputTweet.append($userInputDiv);
-    // append user input stuff inside user input div
-    $userInputDiv
-      .append($('<label for="userInput"> name:</label>'))
-      .append($('<input type="text" id="username-box"></input>'));
+  // // ENTER USERNAME
+  // const $userInputDiv = $('<div id="input-username"></div>');
+  //   // append div to form
+  //   $inputTweet.append($userInputDiv);
+  //   // append user input stuff inside user input div
+  //   $userInputDiv
+  //     .append($('<label for="userInput"> name:</label>'))
+  //     .append($('<input type="text" id="username-box"></input>'));
 
   // ENTER MESSAGE
   const $messageInputDiv = $('<div id="input-message"></div>'); 
@@ -43,10 +43,29 @@ $(() => {
 
    // ---------------------------------------------------------------------------------------------------------------------------
   
-  // SUBMIT BUTTON ON FORM
+  // SUBMIT BUTTON ON FORM + CLICK HANDLER
   const $messageSubmit = $('<button id="submit-button">post twid</button>');
     // add button after form
     $messageSubmit.insertAfter($inputTweet);
+    //click function
+    $messageSubmit.on('click', () => {
+      let $message = $("#input-message").val();
+
+      const writeTweet = ($message) => {
+        const visitor = window.visitor;
+
+        if (!visitor) {
+          throw new Error('Set the global visitor property!');
+        }
+
+        const tweet = {
+          user: visitor,
+          message: $message,
+        };
+        addNewTweets(tweet);
+      };
+      return writeTweet;
+    })
 
  
   // FUNCTION TO ADD TWEETS ----------------------------------------------------------------------------------------------------- 
@@ -60,14 +79,14 @@ $(() => {
       //USERNAME + CLICK ON USERNAME TO SEE TIMELINE ----------------------------------
       // username (class username) button
       const username = tweet.user;
-      const $username = $(`<button class="username-button">@${username}</button>`);
+      const $username = $(`<button class="username">@${username}</button>`);
       // when usename is clicked
       $username.on('click', () => {
         // remove tweets already ON page currently
         $tweetsDiv.empty();
         // calls addTweets with that specific user input
         addNewTweets(streams.users[username]);
-      }) //---------------------------------------------------------------------------------------------------------------------
+      }) //-----------------------------------------------------------------------------
 
       // message div (class message)
       const $message = $(`<div class="message">${tweet.message}</div>`);
@@ -107,8 +126,6 @@ $(() => {
   //-----------------------------------------------------------------------------------------------------------------------------
 
 
-
-
   // STYLING! -------------------------------------------------------------------------------------------------------------------
   // general page
   $('#all-contents').css({
@@ -126,6 +143,6 @@ $(() => {
   $('.tweets').css({
     "background-color": "rgb(255, 204, 110)"
   })
-  // username buttons
+  // -----------------------------------------------------------------------------------------------------------------------------
   
 }); // don't delete this 
