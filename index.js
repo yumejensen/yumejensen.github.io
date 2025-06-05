@@ -128,7 +128,7 @@ $(() => {
   
 
   // SUBMIT BUTTON ON FORM + CLICK HANDLER --------------------------------------------------------------------------------------
-  const $messageSubmit = $('<input id="submit-button" type="submit" value="hi">post twid</input>');
+  const $messageSubmit = $('<input id="submit-button" type="submit" value="post twid">');
     // add button after form
     $messageSubmit.insertAfter($inputTweet);
 
@@ -161,6 +161,15 @@ $(() => {
   //tweets div
   $('.tweets').css({
     "background-color": "rgb(255, 204, 110)"
+  })
+  // post twid button
+  $('#submit-button').css({
+    "margin-top": "10px",
+    "margin-bottom": "20px"
+  })
+  // each tweet
+  $('.tweet').css({
+    "margin-bottom": "15px"
   })
   // -----------------------------------------------------------------------------------------------------------------------------
   
