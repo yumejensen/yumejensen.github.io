@@ -1,7 +1,9 @@
 $(() => {
   // streams.home array holds objects that look like:
   // {user: 'shawndrost', message: 'just enjoyed an entire city #sf', created_at: Wed Jun 04 2025 11:03:43 GMT-0500 (Central Daylight Time)}
-  
+  // set value for window.visitor
+  window.visitor = "guest"
+
   const $page = $('#all-contents'); // everything in the body of twiddler.html
   const $tweetsDiv = $('<div class="tweets"></div>'); // div that holds all the tweets
   $page.append($tweetsDiv); // add div that holds tweets to the body of twiddler.html
@@ -39,33 +41,33 @@ $(() => {
     // append user message stuff inside message input div
     $messageInputDiv
       .append($('<label for="userMsg"> message:</label>'))
-      .append($('<input type="text" id="message-box"></input>'));
+      .append($('<input type="text" id="message-input"></input>'));
 
    // ---------------------------------------------------------------------------------------------------------------------------
   
-  // SUBMIT BUTTON ON FORM + CLICK HANDLER
-  const $messageSubmit = $('<button id="submit-button">post twid</button>');
-    // add button after form
-    $messageSubmit.insertAfter($inputTweet);
-    //click function
-    $messageSubmit.on('click', () => {
-      let $message = $("#input-message").val();
+  // // SUBMIT BUTTON ON FORM + CLICK HANDLER
+  // const $messageSubmit = $('<button id="submit-button">post twid</button>');
+  //   // add button after form
+  //   $messageSubmit.insertAfter($inputTweet);
+  //   //click function
+  //   $messageSubmit.on('click', () => {
+  //     let $message = $("#input-message").val();
 
-      const writeTweet = ($message) => {
-        const visitor = window.visitor;
+  //     const writeTweet = ($message) => {
+  //       const visitor = window.visitor;
 
-        if (!visitor) {
-          throw new Error('Set the global visitor property!');
-        }
+  //       if (!visitor) {
+  //         throw new Error('Set the global visitor property!');
+  //       }
 
-        const tweet = {
-          user: visitor,
-          message: $message,
-        };
-        addNewTweets(tweet);
-      };
-      return writeTweet;
-    })
+  //       const tweet = {
+  //         user: visitor,
+  //         message: $message,
+  //       };
+  //       addNewTweets(tweet);
+  //     };
+  //     return writeTweet;
+  //   })
 
  
   // FUNCTION TO ADD TWEETS ----------------------------------------------------------------------------------------------------- 
@@ -123,9 +125,26 @@ $(() => {
     // call addNewTweets function to refresh
     addNewTweets(streams.home);
   })
-  //-----------------------------------------------------------------------------------------------------------------------------
+  
 
+  // SUBMIT BUTTON ON FORM + CLICK HANDLER --------------------------------------------------------------------------------------
+  const $messageSubmit = $('<input id="submit-button" type="submit" value="hi">post twid</input>');
+    // add button after form
+    $messageSubmit.insertAfter($inputTweet);
 
+    //click function
+    $messageSubmit.on('click', () => {
+      let $message = $("#message-input").val();
+      // add guests to users object from data-generator
+      streams.users.guest = [];
+      // call write tweet function with message input
+      writeTweet($message);
+      // empty old tweets
+      $tweetsDiv.empty();
+      addNewTweets(streams.home);
+    })
+  
+  
   // STYLING! -------------------------------------------------------------------------------------------------------------------
   // general page
   $('#all-contents').css({

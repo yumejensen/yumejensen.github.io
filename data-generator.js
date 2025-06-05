@@ -10,7 +10,7 @@ const streams = {
     shawndrost: [],
     sharksforcheap: [],
     mracus: [],
-    douglascalhoun: [],
+    douglascalhoun: []
   },
 };
 const users = Object.keys(streams.users);
