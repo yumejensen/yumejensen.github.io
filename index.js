@@ -17,6 +17,15 @@ $(() => {
   const $refreshButton = $('<button id="new-tweets-button">refresh twids</button>');
     // insert button after header
     $refreshButton.insertAfter($topOfPage);
+    
+
+  // SIDE BAR AREA
+  const $sidePanel = $('<aside id="side-panel>Post a twid!</aside>');
+  // add panel to page
+  $page.prepend($sidePanel)
+    // append a div to panel
+    $sidePanel.append($('<div id="side-content"></div>'))
+
   
   // FORM TO ADD TWEETS -------------------------------------------------------------------------------------------------------
   const $inputTweet = $('<form id="input-tweet"></form>');
@@ -142,6 +151,8 @@ $(() => {
       // empty old tweets
       $tweetsDiv.empty();
       addNewTweets(streams.home);
+      // clear form text area
+      $('form').find('input, select, textarea').val('');
     })
   
   
@@ -160,6 +171,7 @@ $(() => {
   })
   //tweets div
   $('.tweets').css({
+    "margin-left": "300px",
     "background-color": "rgb(255, 204, 110)"
   })
   // post twid button
