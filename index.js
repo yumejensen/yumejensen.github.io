@@ -15,15 +15,17 @@ $(() => {
     //prepend to main page
    $page.prepend($topOfPage);
   
+
   // DUCK IMAGE - make it a span element
   const $duckler = $('<span id="duckler-span"><img src="images/DUCKLER.PNG" id="duckler"/></span>');
     // LOCATION OF DUCK
-    $topOfPage.append($duckler)
+    $page.append($duckler)
     // DUCK STYLE
     $('#duckler').css({
       "display": "inline-block",
-      "max-width": "400px"
+      "max-width": "350px"
     })
+
 
   // BUTTON TO REFRESH TWEETS
   const $refreshButton = $('<button id="new-tweets-button" class="topBtn">refresh quacks</button>');
@@ -31,7 +33,6 @@ $(() => {
     $refreshButton.insertAfter($topOfPage);
     
 
-  
   // FORM TO ADD TWEETS -------------------------------------------------------------------------------------------------------
   const $inputTweet = $('<form id="input-tweet"></form>');
     // insert form after the refresh button
@@ -58,41 +59,9 @@ $(() => {
       .append($('<input type="text" id="message-input"></input>'));
 
    // ---------------------------------------------------------------------------------------------------------------------------
-  
-
-  //  // SPAN THAT HOLDS ALL OF THE TOP PARTS OF THE PAGE
-  // const $topSection = $('<span id="top-section"></span>');
-  // // prepend to page
-  //   $page.prepend($topSection);
-    
 
 
 
-  // // SUBMIT BUTTON ON FORM + CLICK HANDLER
-  // const $messageSubmit = $('<button id="submit-button">post twid</button>');
-  //   // add button after form
-  //   $messageSubmit.insertAfter($inputTweet);
-  //   //click function
-  //   $messageSubmit.on('click', () => {
-  //     let $message = $("#input-message").val();
-
-  //     const writeTweet = ($message) => {
-  //       const visitor = window.visitor;
-
-  //       if (!visitor) {
-  //         throw new Error('Set the global visitor property!');
-  //       }
-
-  //       const tweet = {
-  //         user: visitor,
-  //         message: $message,
-  //       };
-  //       addNewTweets(tweet);
-  //     };
-  //     return writeTweet;
-  //   })
-  
- 
   // FUNCTION TO ADD TWEETS ----------------------------------------------------------------------------------------------------- 
   // array param to make function re-usable
   function addNewTweets(array){ // putting map into a function
@@ -107,6 +76,11 @@ $(() => {
       const $username = $(`<button class="username">@${username}</button>`);
       // when usename is clicked
       $username.on('click', () => {
+        //quack audio
+        var audio = new Audio('quacky/single-quack-from-a-duck.wav');
+        // play audio on click!
+        audio.play();
+        
         // remove tweets already ON page currently
         $tweetsDiv.empty();
         // calls addTweets with that specific user input
@@ -162,9 +136,14 @@ $(() => {
   addNewTweets(streams.home); // CALL ADD TWEETS 
 
 
+
   // CLICK HANDLER ON REFRESH TWEETS BUTTON ------------------------------------------------------------------------------------
   $refreshButton.on('click', () => {
-    
+    //quack audio
+    var audio = new Audio('quacky/single-quack-from-a-duck.wav');
+    // play audio on click!
+    audio.play();
+
     // remove tweets already ON page currently
     $tweetsDiv.empty();
     // call addNewTweets function to refresh
@@ -196,6 +175,7 @@ $(() => {
   })
   
 
+
   // SUBMIT BUTTON ON FORM + CLICK HANDLER --------------------------------------------------------------------------------------
   const $messageSubmit = $('<input id="submit-button" class="topBtn" type="submit" value="post quack">');
     // add button after form
@@ -203,6 +183,11 @@ $(() => {
 
     //click function
     $messageSubmit.on('click', () => {
+      //quack audio
+      var audio = new Audio('quacky/single-quack-from-a-duck.wav');
+      // play audio on click!
+      audio.play();
+
       // get text value of message
       let $message = $("#message-input").val();
       // add guests to users object from data-generator
@@ -239,21 +224,40 @@ $(() => {
 
       // clear form text area
       $('form').find('input, select, textarea').val('');
+      
     })
   
+
+  
+
+  // CLICK HANDLER ON DUCKLER IMAGE --------------------------------------------------------------------------------------
+  $duckler.on('click', () => {
+    // quack audio
+    var audio = new Audio('quacky/single-quack-from-a-duck.wav');
+    // play audio on click!
+    audio.play();
+  })
+
   
   // STYLING! -------------------------------------------------------------------------------------------------------------------
   // general page
   $('#all-contents').css({
     "background-color": "rgb(255, 241, 118)",
-    "padding-left": "30px",
-    "padding-right": "30px",
+    "padding-left": "50px",
+    "padding-right": "50px",
     "padding-top": "30px",
     "padding-bottom": "50px"
     })
+  // duck image
+  $('#duckler-span').css({
+    'position': 'fixed',
+    'left':'420px',
+    'top': '35px'
+
+  })
   // header
   $('#header').css({
-     "font-size": "50px",
+     "font-size": "60px",
   })
   // write a twid
   $('#input-form-title').css({
