@@ -12,6 +12,14 @@ $(() => {
   const $topOfPage = $('<h1 id="header">DUCKLER!</h1>');
     //prepend to main page
     $page.prepend($topOfPage);
+  
+  // DUCK IMAGE
+  const $duckler = $('<img src="images/DUCKLER.PNG" id="duckler"/>');
+    $page.prepend($duckler)
+  // DUCK STYLE
+  $('#duckler').css({
+    "max-width": "400px"
+  })
 
   // BUTTON TO REFRESH TWEETS
   const $refreshButton = $('<button id="new-tweets-button" class="topBtn">refresh quacks</button>');
