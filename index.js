@@ -9,22 +9,22 @@ $(() => {
   $page.append($tweetsDiv); // add div that holds tweets to the body of twiddler.html
 
   // HEADER OF WEB-PAGE
-  const $topOfPage = $('<h1 id="header">TWIDDLER!</h1>');
+  const $topOfPage = $('<h1 id="header">DUCKLER!</h1>');
     //prepend to main page
     $page.prepend($topOfPage);
 
   // BUTTON TO REFRESH TWEETS
-  const $refreshButton = $('<button id="new-tweets-button">refresh twids</button>');
+  const $refreshButton = $('<button id="new-tweets-button" class="topBtn">refresh quacks</button>');
     // insert button after header
     $refreshButton.insertAfter($topOfPage);
     
 
   // SIDE BAR AREA
-  const $sidePanel = $('<aside id="side-panel>Post a twid!</aside>');
-  // add panel to page
-  $page.prepend($sidePanel)
-    // append a div to panel
-    $sidePanel.append($('<div id="side-content"></div>'))
+  // const $sidePanel = $('<aside id="side-panel>Post a twid!</aside>');
+  // // add panel to page
+  // $page.prepend($sidePanel)
+  //   // append a div to panel
+  //   $sidePanel.append($('<div id="side-content"></div>'))
 
   
   // FORM TO ADD TWEETS -------------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ $(() => {
     // insert form after the refresh button
     $inputTweet.insertAfter($refreshButton);
   // Form header
-  $inputTweet.append($('<h1 id="input-form-title">Write a twid!</h1>'))
+  $inputTweet.append($('<h1 id="input-form-title">Write a quack!</h1>'))
 
   // // ENTER USERNAME
   // const $userInputDiv = $('<div id="input-username"></div>');
@@ -49,7 +49,7 @@ $(() => {
     $inputTweet.append($messageInputDiv);
     // append user message stuff inside message input div
     $messageInputDiv
-      .append($('<label for="userMsg"> message:</label>'))
+      .append($('<label for="userMsg"> message: </label>'))
       .append($('<input type="text" id="message-input"></input>'));
 
    // ---------------------------------------------------------------------------------------------------------------------------
@@ -78,6 +78,10 @@ $(() => {
   //     return writeTweet;
   //   })
 
+
+
+
+  
  
   // FUNCTION TO ADD TWEETS ----------------------------------------------------------------------------------------------------- 
   // array param to make function re-usable
@@ -97,6 +101,17 @@ $(() => {
         $tweetsDiv.empty();
         // calls addTweets with that specific user input
         addNewTweets(streams.users[username]);
+        // CSS STYLING - so it keeps after refresh ----
+        // each tweet
+        $('.tweet').css({
+          "margin-bottom": "15px"
+        })
+        // username button
+        $('.username').css({
+          "background-color": "rgb(255, 253, 121)",
+          "border-color": "rgb(219, 87, 11)",
+          "border-radius": "7px"
+        }) //------------------------------------------
       }) //-----------------------------------------------------------------------------
 
       // message div (class message)
@@ -133,11 +148,23 @@ $(() => {
     $tweetsDiv.empty();
     // call addNewTweets function to refresh
     addNewTweets(streams.home);
+
+    // CSS STYLING - so it keeps after refresh ----
+    // each tweet
+    $('.tweet').css({
+      "margin-bottom": "15px"
+    })
+    // username button
+    $('.username').css({
+      "background-color": "rgb(255, 253, 121)",
+      "border-color": "rgb(219, 87, 11)",
+      "border-radius": "7px"
+    }) //------------------------------------------
   })
   
 
   // SUBMIT BUTTON ON FORM + CLICK HANDLER --------------------------------------------------------------------------------------
-  const $messageSubmit = $('<input id="submit-button" type="submit" value="post twid">');
+  const $messageSubmit = $('<input id="submit-button" class="topBtn" type="submit" value="post quack">');
     // add button after form
     $messageSubmit.insertAfter($inputTweet);
 
@@ -151,6 +178,19 @@ $(() => {
       // empty old tweets
       $tweetsDiv.empty();
       addNewTweets(streams.home);
+
+      // CSS STYLING - so it keeps after refresh ----
+      // each tweet
+      $('.tweet').css({
+        "margin-bottom": "15px"
+      })
+      // username button
+      $('.username').css({
+        "background-color": "rgb(255, 253, 121)",
+        "border-color": "rgb(219, 87, 11)",
+        "border-radius": "7px"
+      }) //------------------------------------------
+
       // clear form text area
       $('form').find('input, select, textarea').val('');
     })
@@ -167,21 +207,67 @@ $(() => {
     })
   // header
   $('#header').css({
-     "font-size": "28px" 
+     "font-size": "50px",
   })
-  //tweets div
-  $('.tweets').css({
-    "margin-left": "300px",
-    "background-color": "rgb(255, 204, 110)"
+  // write a twid
+  $('#input-form-title').css({
+    "font-size": "20px",
+  })
+  // refresh twids AND post twids buttons
+  $('.topBtn').css({
+    "background-color": "rgb(255, 200, 47)",
+    "border-style": "solid",
+    "border-width": "3px",
+    "border-color": "rgb(219, 87, 11)",
+    "border-radius": "7px",
+    "padding": "5px" // spacing around content
+  })
+  // refresh twid button
+  $('#new-tweets-button').css({
+    "margin-bottom": "20px"
+  })
+
+  // form input
+  $('#message-input').css({
+    "border-style": "solid",
+    "border-color": "rgb(219, 87, 11)",
+    "border-radius": "7px",
+    "padding: 15px": "10px",
+    "line-height": "200%",
+    "margin-bottom": "7px", // space under
   })
   // post twid button
   $('#submit-button').css({
     "margin-top": "10px",
-    "margin-bottom": "20px"
+    "margin-bottom": "20px",
+    // "background-color": "rgb(255, 200, 47)",
+    // "border-color": "rgb(219, 87, 11)",
+    // "border-radius": "7px"
+  })
+  //tweets div
+  $('.tweets').css({
+    /*"margin-left": "300px",*/
+    //"background-color": "rgb(255, 210, 113)"
   })
   // each tweet
   $('.tweet').css({
-    "margin-bottom": "15px"
+    "margin-bottom": "15px", // space under
+    "background-color": "rgb(255, 200, 47)", // bg color
+    "border-radius": "10px", // rounded corners
+    "border-style": "dashed", // add border
+    "border-width": "2px",
+    "border-color": "rgb(219, 87, 11)",
+    "padding-left": "15px", // spacing around content
+    "padding-right": "15px",
+    "padding-top": "8px",
+    "padding-bottom": "15px",
+  })
+  // username button
+  $('.username').css({
+    "background-color": "rgb(255, 253, 121)",
+    "border-style": "solid",
+    "border-color": "rgb(219, 87, 11)",
+    "border-radius": "7px"
   })
   // -----------------------------------------------------------------------------------------------------------------------------
   
