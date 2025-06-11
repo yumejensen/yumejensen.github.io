@@ -1,3 +1,0 @@
-# yumejensen.github.io
-
-hello
