@@ -1,38 +1,35 @@
 $(() => {
   // streams.home array holds objects that look like:
   // {user: 'shawndrost', message: 'just enjoyed an entire city #sf', created_at: Wed Jun 04 2025 11:03:43 GMT-0500 (Central Daylight Time)}
+
   // set value for window.visitor
-  window.visitor = "guest"
+  window.visitor = "anonymousduck"
 
   const $page = $('#all-contents'); // everything in the body of twiddler.html
   const $tweetsDiv = $('<div class="tweets"></div>'); // div that holds all the tweets
   $page.append($tweetsDiv); // add div that holds tweets to the body of twiddler.html
 
+
   // HEADER OF WEB-PAGE
   const $topOfPage = $('<h1 id="header">DUCKLER!</h1>');
     //prepend to main page
-    $page.prepend($topOfPage);
+   $page.prepend($topOfPage);
   
-  // DUCK IMAGE
-  const $duckler = $('<img src="images/DUCKLER.PNG" id="duckler"/>');
-    $page.prepend($duckler)
-  // DUCK STYLE
-  $('#duckler').css({
-    "max-width": "400px"
-  })
+  // DUCK IMAGE - make it a span element
+  const $duckler = $('<span id="duckler-span"><img src="images/DUCKLER.PNG" id="duckler"/></span>');
+    // LOCATION OF DUCK
+    $topOfPage.append($duckler)
+    // DUCK STYLE
+    $('#duckler').css({
+      "display": "inline-block",
+      "max-width": "400px"
+    })
 
   // BUTTON TO REFRESH TWEETS
   const $refreshButton = $('<button id="new-tweets-button" class="topBtn">refresh quacks</button>');
     // insert button after header
     $refreshButton.insertAfter($topOfPage);
     
-
-  // SIDE BAR AREA
-  // const $sidePanel = $('<aside id="side-panel>Post a twid!</aside>');
-  // // add panel to page
-  // $page.prepend($sidePanel)
-  //   // append a div to panel
-  //   $sidePanel.append($('<div id="side-content"></div>'))
 
   
   // FORM TO ADD TWEETS -------------------------------------------------------------------------------------------------------
@@ -62,6 +59,15 @@ $(() => {
 
    // ---------------------------------------------------------------------------------------------------------------------------
   
+
+  //  // SPAN THAT HOLDS ALL OF THE TOP PARTS OF THE PAGE
+  // const $topSection = $('<span id="top-section"></span>');
+  // // prepend to page
+  //   $page.prepend($topSection);
+    
+
+
+
   // // SUBMIT BUTTON ON FORM + CLICK HANDLER
   // const $messageSubmit = $('<button id="submit-button">post twid</button>');
   //   // add button after form
@@ -85,10 +91,6 @@ $(() => {
   //     };
   //     return writeTweet;
   //   })
-
-
-
-
   
  
   // FUNCTION TO ADD TWEETS ----------------------------------------------------------------------------------------------------- 
@@ -109,17 +111,27 @@ $(() => {
         $tweetsDiv.empty();
         // calls addTweets with that specific user input
         addNewTweets(streams.users[username]);
-        // CSS STYLING - so it keeps after refresh ----
-        // each tweet
+
+        // CSS STYLING ------ keeps after refresh ----
         $('.tweet').css({
-          "margin-bottom": "15px"
+          "margin-bottom": "15px", // space under
+          "background-color": "rgb(255, 200, 47)", // bg color
+          "border-radius": "10px", // rounded corners
+          "border-style": "dashed", // add border
+          "border-width": "2px",
+          "border-color": "rgb(219, 87, 11)",
+          "padding-left": "15px", // spacing around content
+          "padding-right": "15px",
+          "padding-top": "8px",
+          "padding-bottom": "15px",
         })
         // username button
         $('.username').css({
           "background-color": "rgb(255, 253, 121)",
+          "border-style": "solid",
           "border-color": "rgb(219, 87, 11)",
           "border-radius": "7px"
-        }) //------------------------------------------
+        })
       }) //-----------------------------------------------------------------------------
 
       // message div (class message)
@@ -152,22 +164,35 @@ $(() => {
 
   // CLICK HANDLER ON REFRESH TWEETS BUTTON ------------------------------------------------------------------------------------
   $refreshButton.on('click', () => {
+    
     // remove tweets already ON page currently
     $tweetsDiv.empty();
     // call addNewTweets function to refresh
     addNewTweets(streams.home);
 
-    // CSS STYLING - so it keeps after refresh ----
+    // CSS STYLING ------ keeps after refresh ----
+    // each tweet
     // each tweet
     $('.tweet').css({
-      "margin-bottom": "15px"
+      "margin-bottom": "15px", // space under
+      "background-color": "rgb(255, 200, 47)", // bg color
+      "border-radius": "10px", // rounded corners
+      "border-style": "dashed", // add border
+      "border-width": "2px",
+      "border-color": "rgb(219, 87, 11)",
+      "padding-left": "15px", // spacing around content
+      "padding-right": "15px",
+      "padding-top": "8px",
+      "padding-bottom": "15px",
     })
     // username button
     $('.username').css({
       "background-color": "rgb(255, 253, 121)",
+      "border-style": "solid",
       "border-color": "rgb(219, 87, 11)",
       "border-radius": "7px"
-    }) //------------------------------------------
+    })
+    //---------------------------------------------
   })
   
 
@@ -178,26 +203,39 @@ $(() => {
 
     //click function
     $messageSubmit.on('click', () => {
+      // get text value of message
       let $message = $("#message-input").val();
       // add guests to users object from data-generator
-      streams.users.guest = [];
+      streams.users.anonymousduck = [];
       // call write tweet function with message input
       writeTweet($message);
       // empty old tweets
       $tweetsDiv.empty();
       addNewTweets(streams.home);
 
-      // CSS STYLING - so it keeps after refresh ----
+      // CSS STYLING ------ keeps after refresh ----
+      // each tweet
       // each tweet
       $('.tweet').css({
-        "margin-bottom": "15px"
+        "margin-bottom": "15px", // space under
+        "background-color": "rgb(255, 200, 47)", // bg color
+        "border-radius": "10px", // rounded corners
+        "border-style": "dashed", // add border
+        "border-width": "2px",
+        "border-color": "rgb(219, 87, 11)",
+        "padding-left": "15px", // spacing around content
+        "padding-right": "15px",
+        "padding-top": "8px",
+        "padding-bottom": "15px",
       })
       // username button
       $('.username').css({
         "background-color": "rgb(255, 253, 121)",
+        "border-style": "solid",
         "border-color": "rgb(219, 87, 11)",
         "border-radius": "7px"
-      }) //------------------------------------------
+      })
+      //---------------------------------------------
 
       // clear form text area
       $('form').find('input, select, textarea').val('');
