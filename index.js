@@ -23,7 +23,8 @@ $(() => {
     // DUCK STYLE
     $('#duckler').css({
       "display": "inline-block",
-      "max-width": "350px"
+      //"max-width": "350px",
+      "max-width": "40%",
     })
 
 
@@ -88,6 +89,7 @@ $(() => {
 
         // CSS STYLING ------ keeps after refresh ----
         $('.tweet').css({
+          "color": "black",
           "margin-bottom": "15px", // space under
           "background-color": "rgb(255, 200, 47)", // bg color
           "border-radius": "10px", // rounded corners
@@ -101,6 +103,7 @@ $(() => {
         })
         // username button
         $('.username').css({
+          "color": "black",
           "background-color": "rgb(255, 253, 121)",
           "border-style": "solid",
           "border-color": "rgb(219, 87, 11)",
@@ -153,6 +156,7 @@ $(() => {
     // each tweet
     // each tweet
     $('.tweet').css({
+      "color": "black",
       "margin-bottom": "15px", // space under
       "background-color": "rgb(255, 200, 47)", // bg color
       "border-radius": "10px", // rounded corners
@@ -166,6 +170,7 @@ $(() => {
     })
     // username button
     $('.username').css({
+      "color": "black",
       "background-color": "rgb(255, 253, 121)",
       "border-style": "solid",
       "border-color": "rgb(219, 87, 11)",
@@ -202,6 +207,7 @@ $(() => {
       // each tweet
       // each tweet
       $('.tweet').css({
+        "color": "black",
         "margin-bottom": "15px", // space under
         "background-color": "rgb(255, 200, 47)", // bg color
         "border-radius": "10px", // rounded corners
@@ -215,6 +221,7 @@ $(() => {
       })
       // username button
       $('.username').css({
+        "color": "black",
         "background-color": "rgb(255, 253, 121)",
         "border-style": "solid",
         "border-color": "rgb(219, 87, 11)",
@@ -242,8 +249,9 @@ $(() => {
   // STYLING! -------------------------------------------------------------------------------------------------------------------
   // general page
   $('#all-contents').css({
+    "color": "black",
     "background-color": "rgb(255, 241, 118)",
-    "padding-left": "50px",
+    "padding-left": "60px",
     "padding-right": "50px",
     "padding-top": "30px",
     "padding-bottom": "50px"
@@ -251,13 +259,14 @@ $(() => {
   // duck image
   $('#duckler-span').css({
     'position': 'fixed',
-    'left':'420px',
-    'top': '35px'
+    //'left':'400px',
+    'left': '19%',
+    'top': '2%'
 
   })
   // header
   $('#header').css({
-     "font-size": "60px",
+     "font-size": "69px",
   })
   // write a twid
   $('#input-form-title').css({
@@ -265,6 +274,7 @@ $(() => {
   })
   // refresh twids AND post twids buttons
   $('.topBtn').css({
+    "color": "black",
     "background-color": "rgb(255, 200, 47)",
     "border-style": "solid",
     "border-width": "3px",
@@ -279,6 +289,8 @@ $(() => {
 
   // form input
   $('#message-input').css({
+    "color": "black",
+    "background-color": "rgb(255, 250, 185)",
     "border-style": "solid",
     "border-color": "rgb(219, 87, 11)",
     "border-radius": "7px",
@@ -301,6 +313,7 @@ $(() => {
   })
   // each tweet
   $('.tweet').css({
+    "color": "black",
     "margin-bottom": "15px", // space under
     "background-color": "rgb(255, 200, 47)", // bg color
     "border-radius": "10px", // rounded corners
@@ -314,6 +327,7 @@ $(() => {
   })
   // username button
   $('.username').css({
+    "color": "black",
     "background-color": "rgb(255, 253, 121)",
     "border-style": "solid",
     "border-color": "rgb(219, 87, 11)",
